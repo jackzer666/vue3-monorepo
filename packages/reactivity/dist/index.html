@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script type="module">
+    import { reactive, effect, ref, computed } from './reactivity.js';
+
+    // const obj = { name: 'zt', age: 28 }
+
+    // const state1 = reactive(obj);
+    // const state2 = reactive(obj);
+    // const state3 = reactive(state1);
+
+    // console.log(state1 === state2, state1 === state3); // true true
+
+    // let runner = effect(() => {
+    //   console.log('state1.name', state1.name);
+    // }, {
+    //   scheduler: () => {
+    //     console.log('scheduler');
+    //     runner();
+    //   }
+    // });
+
+    // setTimeout(() => {
+    //   state1.name = 'zt2';
+    // }, 1000);
+
+    const state = ref(false)
+
+    const c = computed(() => {
+      console.log('computed');
+      return state.value ? 1 : 2
+    })
+
+    effect(() => {
+      console.log(c.value === 1 ? 'c is 1' : 'c is 2');
+      console.log(c.value)
+    })
+
+    setTimeout(() => {
+      state.value = true;
+    }, 1000);
+
+  
+  </script>
+</body>
+
+</html>
